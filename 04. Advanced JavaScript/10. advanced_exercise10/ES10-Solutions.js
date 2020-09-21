@@ -88,7 +88,8 @@ const trapped = [
 ];
 //Solution
 console.log(trapped.flat(Infinity))
-// Infintiy is actually a LARGE number in JavaScipt. It represents the maximum amount of memory that we can hold for a number! Learn more here: https://riptutorial.com/javascript/example/2337/infinity-and--infinity
+// Infintiy is actually a LARGE number in JavaScipt. It represents the maximum amount of memory that we 
+//can hold for a number! Learn more here: https://riptutorial.com/javascript/example/2337/infinity-and--infinity
 
 //#5 Clean up this email to have no whitespaces. Make the answer be in a single line (return a new string):
 const userEmail3 = '     cannotfillemailformcorrectly@gmail.com   '
