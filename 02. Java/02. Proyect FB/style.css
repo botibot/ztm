@@ -1,0 +1,12 @@
+body {
+  margin: auto 0;
+  font-family: "Ubuntu", "Roboto", sans-serif;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+p {
+  font-weight: normal;
+}

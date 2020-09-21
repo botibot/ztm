@@ -1,0 +1,38 @@
+/* Selector {
+    Property: Value;
+} */
+
+body {
+    background-size: cover;
+    background-image: url(snow.jpg);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+h2 {
+    color:#550000;
+    text-align: center;
+    border: 5px dashed #806D15;
+}
+
+p {
+    line-height: 40px;
+    font-size: 150%;
+}
+
+img {
+    float: right;
+}
+
+footer{
+    clear: both;
+    text-align: center;
+}
+
+li{
+    list-style: none;
+    display: inline-block;
+}
+
+.webtext {
+    border: 5px dashed green
+}

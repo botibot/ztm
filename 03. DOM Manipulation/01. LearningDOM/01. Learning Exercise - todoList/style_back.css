@@ -1,0 +1,68 @@
+body {
+  margin: auto 0;
+  font-family: "Ubuntu", "Roboto", sans-serif;
+  text-align: center;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 3em;
+  margin-bottom: 50px;
+}
+
+.coolTitle {
+  transform: skewY(-10deg);
+  letter-spacing: 4px;
+  word-spacing: -8px;
+  color: tomato;
+  text-shadow: -1px -1px 0 firebrick, -2px -2px 0 firebrick,
+    -3px -3px 0 firebrick, -4px -4px 0 firebrick, -5px -5px 0 firebrick,
+    -6px -6px 0 firebrick, -7px -7px 0 firebrick, -8px -8px 0 firebrick,
+    -30px 20px 40px dimgrey;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+p {
+  font-size: 2em;
+  line-height: 0px;
+}
+
+.instructions{
+  font-size: 1em;
+  color: rgb(71, 71, 185);
+}
+
+.second {
+  color: red;
+  margin-bottom: 50px;
+}
+
+ul {
+  display: grid;
+  gap: .5em;
+}
+
+li, button:hover{
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
+  padding-right: 40px
+}
+
+button {
+  margin-left: 20px;
+  justify-content: right;
+}
+
+.pgrid {
+  grid-template-columns: repeat(auto, minmax(300px, 1fr));
+  grid-column-start: 2;
+  grid-column-end: five;
+  grid-row-start: row1-start;
+  grid-row-end: 3;
+}
