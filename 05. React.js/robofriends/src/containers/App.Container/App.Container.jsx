@@ -6,62 +6,47 @@ import Scroll from "../../components/Scroll.Component/Scroll.Component";
 import ErrorBoundry from "../../components/ErrorBoundry.Component/ErrorBoundry.Component";
 // import { robots } from "./robots.js";
 import "./App.Styles.css";
-import { setSearchField } from "../../redux/actions";
+import { requestRobots, setSearchField } from "../../redux/actions";
 
 const mapStateToProps = (state) => {
   return {
-    searchField: state.searchField,
+    searchField: state.searchRobots.searchField,
+    robots: state.requestRobots.robots,
+    isPending: state.requestRobots.isPending,
+    error: state.requestRobots.error,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+    onRequestRobots: () => dispatch(requestRobots()),
+    //?other way: onRequestRobots: () => requestRobots(dispatch),
   };
 };
 
 class App extends Component {
-  constructor() {
-    super();
-    //! state are things that can change, they like on the parent component
-    this.state = {
-      //   * robots: robots,   //* loading from local file not realistic.
-      robots: [],
-    };
-  }
-
   componentDidMount() {
-    //? console.log(this.props.store.getState());
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((users) => this.setState({ robots: users }));
+    this.props.onRequestRobots();
   }
 
   render() {
-    const { robots } = this.state;
-    const { searchField, onSearchChange } = this.props;
-    const filteredRobots = robots.filter((robot) => {
-      return robot.name
-        .toLocaleLowerCase()
-        .includes(searchField.toLocaleLowerCase());
-    });
-    // * quick way to display somethign while loading
-    return !robots.length ? (
-      <h1>Loading</h1>
-    ) : (
-      // ! this sintax <> </> its a shorthand function for react fragments that allows
-      // ! us to return more than one html element.
-      <>
-        <div className="tc">
-          <h1 className="f1">RoboFriends</h1>
-          <SearchBox searchChange={onSearchChange} />
-          <Scroll>
+    const { robots, searchField, onSearchChange, isPending } = this.props;
+    const filteredRobots = robots.filter(robot => {
+      return robot.name.toLowerCase().includes(searchField.toLowerCase())
+    })
+    return (
+      <div className="tc">
+        <h1 className="f1">RoboFriends</h1>
+        <SearchBox searchChange={onSearchChange} />
+        <Scroll>
+          {isPending ? <h1>Loading</h1> :
             <ErrorBoundry>
               <CardList robots={filteredRobots} />
             </ErrorBoundry>
-          </Scroll>
-        </div>
-      </>
+          }
+        </Scroll>
+      </div>
     );
   }
 }
