@@ -1,3 +1,2 @@
-# Compiled source #
-###################
-/node_modules
+# dependencies
+/05. React.js/robofriends/node_modules/*
