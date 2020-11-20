@@ -2,4 +2,5 @@
 # dependencies
 /05. React.js/robofriends/node_modules/*
 /06. Node/nodeExpressServer/node_modules/*
+/06. Node/nodeServer/node_modules/*
 */node_modules

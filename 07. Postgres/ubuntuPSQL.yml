@@ -1,0 +1,29 @@
+# Use postgres/example user/password credentials
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: cayorch
+      POSTGRES_PASSWORD: 0Cosmic0
+    container_name: psql
+    networks: 
+      - localpsql
+  
+  adminer:
+    image: adminer
+    restart: always
+    container_name: adminer
+    ports:
+      - 8080:8080
+    networks: 
+      - localpsql
+
+volumes:
+  db:
+    name: psqlVol
+
+networks:
+  localpsql:
