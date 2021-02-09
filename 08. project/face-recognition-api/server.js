@@ -1,13 +1,25 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const hash = require("object-hash");
 const bcrypt = require("bcrypt");
+const cors = require("cors");
+const listeningPort = 3001;
+
+//const hash = require("object-hash");
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 const database = {
   users: [
+    {
+      id: "001",
+      name: "Jorge",
+      email: "jorge@mail.com",
+      password: "123",
+      entries: 12,
+      joined: new Date(),
+    },
     {
       id: "123",
       name: "Jhon",
@@ -56,7 +68,7 @@ app.post("/sigin", (req, res) => {
     req.body.email === database.users[0].email &&
     req.body.password === database.users[0].password
   ) {
-    res.json("sucess");
+    res.json(database.users[0]);
   } else {
     res.status(400).json("error logging in");
   }
@@ -105,6 +117,6 @@ app.put("/image", (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("app is running on port 3000");
+app.listen(listeningPort, () => {
+  console.log("app is running on port:", listeningPort);
 });

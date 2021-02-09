@@ -36,8 +36,33 @@ class App extends Component {
       box: {},
       route: "signin",
       isSignedIn: false,
+      user: {
+        id: "",
+        name: "",
+        email: "",
+        entries: 0,
+        joined: "",
+      },
     };
   }
+
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined,
+      },
+    });
+  };
+
+  // componentDidMount() {
+  //   fetch("http://localhost:3001/")
+  //     .then((response) => response.json())
+  //     .then(console.log); // this will log the data received. Its the same as data => console.log(data)
+  // }
 
   calculateFaceLocation = (data) => {
     const clarifaiFace =
@@ -81,7 +106,7 @@ class App extends Component {
   };
 
   render() {
-    const { isSignedIn, imageUrl, route, box } = this.state;
+    const { isSignedIn, imageUrl, route, box, user } = this.state;
     return (
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
@@ -92,7 +117,7 @@ class App extends Component {
               onRouteChange={this.onRouteChange}
             />
             <Logo />
-            <Rank />
+            <Rank name={user.name} entries={user.entries} />
             <ImageLinkForm
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
@@ -101,11 +126,17 @@ class App extends Component {
           </div>
         ) : route === "signin" ? (
           <div>
-            <SignIn onRouteChange={this.onRouteChange} />
+            <SignIn
+              loadUser={this.loadUser}
+              onRouteChange={this.onRouteChange}
+            />
             <QR />
           </div>
         ) : (
-          <Register onRouteChange={this.onRouteChange} />
+          <Register
+            onRouteChange={this.onRouteChange}
+            loadUser={this.loadUser}
+          />
         )}
       </div>
     );
