@@ -23,22 +23,17 @@ class Register extends Component {
   };
 
   onRegisterSignIn = () => {
+    const { name, registerEmail, resgisterPassword } = this.state;
     fetch("http://localhost:3001/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: this.state.name,
-        email: this.state.registerEmail,
-        password: this.state.resgisterPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((user) => {
-        if (user) {
-          this.props.loadUser(user);
-          this.props.onRouteChange("home");
-        }
-      });
+      body: JSON.stringify({ name, registerEmail, resgisterPassword }),
+    }).then((user) => {
+      if (user.id) {
+        this.props.loadUser(user);
+        this.props.onRouteChange("home");
+      }
+    });
   };
 
   render() {

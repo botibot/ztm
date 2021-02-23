@@ -1,0 +1,72 @@
+# Use postgres/example user/password credentials
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: cayorch
+      POSTGRES_PASSWORD: 0Cosmic0
+    container_name: psql
+    networks:
+      - faceRecApp
+
+  pgAdmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: cayorch@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 0Cosmic0
+    container_name: pgAdmin
+    ports:
+      - 8081:80
+    networks:
+      - faceRecApp
+
+  adminer:
+    image: adminer
+    restart: always
+    container_name: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - faceRecApp
+
+  express:
+    image: node:expressServer
+    restart: always
+    container_name: node-express
+    volumes:
+      - type: bind
+        source: ../face-recognition-api/serverFiles
+        target: /ExpressServer/server
+    command: ["nodemon", "/ExpressServer/server/server.js"]
+    ports:
+      - 3001:9001
+    networks:
+      - faceRecApp
+
+  faceApp:
+    image: node:reactApp
+    restart: always
+    container_name: reactApp
+    volumes:
+      - type: bind
+        source: ../face-recognition/src
+        target: /react-app/src
+      - type: bind
+        source: ../face-recognition/public
+        target: /react-app/public
+    command: ["npm", "start"]
+    ports:
+      - 3000:3000
+    networks:
+      - faceRecApp
+
+volumes:
+  db:
+    name: psqlVol
+
+networks:
+  faceRecApp:

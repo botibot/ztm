@@ -1,0 +1,7 @@
+FROM node:alpine3.13
+EXPOSE 9001
+WORKDIR /ExpressServer
+COPY package.json package.json
+RUN npm install \
+    && npm install -g nodemon
+CMD [ "nodemon" ]

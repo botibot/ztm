@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
-const listeningPort = 3001;
+const listeningPort = 9001;
 
 //const hash = require("object-hash");
 
@@ -13,11 +13,11 @@ app.use(cors());
 const database = {
   users: [
     {
-      id: "001",
+      id: "002",
       name: "Jorge",
       email: "jorge@mail.com",
       password: "123",
-      entries: 12,
+      entries: 8,
       joined: new Date(),
     },
     {

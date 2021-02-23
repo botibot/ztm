@@ -1,0 +1,6 @@
+FROM node:current-alpine3.13
+RUN npx create-react-app react-app
+WORKDIR /react-app
+COPY appFiles/package.json package.json
+RUN npm install --force
+EXPOSE 3000
