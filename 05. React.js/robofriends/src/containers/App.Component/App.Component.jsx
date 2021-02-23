@@ -11,21 +11,20 @@ class App extends Component {
     super();
     //! state are things that can change, they like on the parent component
     this.state = {
-      //   * robots: robots,   //* loading from local file not realistic.
       robots: [],
       searchfield: "",
     };
   }
+
+  // onSearchChange = (event) => {
+  //   this.setState({ searchfield: event.target.value });
+  // };
 
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((users) => this.setState({ robots: users }));
   }
-
-  onSearchCahnge = (event) => {
-    this.setState({ searchfield: event.target.value });
-  };
 
   render() {
     const { robots, searchfield } = this.state;
@@ -43,7 +42,7 @@ class App extends Component {
       <>
         <div className="tc">
           <h1 className="f1">RoboFriends</h1>
-          <SearchBox searchChange={this.onSearchCahnge} />
+          <SearchBox searchChange={this.onSearchChange} />
           <Scroll>
             <ErrorBoundry>
               <CardList robots={filteredRobots} />
